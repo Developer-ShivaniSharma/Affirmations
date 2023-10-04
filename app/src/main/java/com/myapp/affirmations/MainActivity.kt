@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -46,7 +47,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun AffirmationApp() {
-    AffirmationList(affirmationlist = Datasource().loadAffirmations(),)
+    AffirmationList(affirmationlist = Datasource().loadAffirmations())
 
 }
 
@@ -78,7 +79,7 @@ fun AffirmationCard(affirmation: Affirmation, modifier: Modifier = Modifier) {
 @Composable
 fun AffirmationList(affirmationlist: List<Affirmation>, modifier: Modifier = Modifier) {
     LazyColumn(modifier = modifier) {
-        item(affirmationlist) { affirmation ->
+        items(affirmationlist) { affirmation ->
             AffirmationCard(
                 affirmation = affirmation,
                 modifier = Modifier.padding(8.dp)
@@ -93,4 +94,22 @@ fun AffirmationList(affirmationlist: List<Affirmation>, modifier: Modifier = Mod
 @Composable
 private fun AffirmationCardPreview() {
     AffirmationCard(Affirmation(R.string.affirmation1, R.drawable.image1))
+}
+
+@Preview
+@Composable
+private fun AffirmationListPreview() {
+    AffirmationList(
+        affirmationlist = listOf(
+            Affirmation(R.string.affirmation1, R.drawable.image1),
+            Affirmation(R.string.affirmation1, R.drawable.image1),
+            Affirmation(R.string.affirmation1, R.drawable.image1),
+            Affirmation(R.string.affirmation1, R.drawable.image1)
+        )
+    )
+}
+@Preview
+@Composable
+private fun AffirmationAppPreview(){
+    AffirmationList(affirmationlist = Datasource().loadAffirmations())
 }
